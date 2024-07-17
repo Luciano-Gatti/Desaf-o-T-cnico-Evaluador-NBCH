@@ -430,25 +430,60 @@
     <created_date>2024/07/16 16:26:22.937</created_date>
     <modified_user>-</modified_user>
     <modified_date>2024/07/16 16:26:22.937</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <order>
     <hop>
-      <from>Tercera_Validacion Excel input</from>
+      <from>Cuarta_Validacion Excel input</from>
       <to>Validar Longitud</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Validar Longitud</from>
-      <to>Validacion Excel output</to>
+      <to>Reportar Provincias Inexistentes</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Reportar Provincias Inexistentes</from>
+      <to>Select values</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values</from>
+      <to>Add constants</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Add constants</from>
+      <to>Modified JavaScript value</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Modified JavaScript value</from>
+      <to>Agregar OK</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Agregar OK</from>
+      <to>Select values 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 2</from>
+      <to>Sort rows</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows</from>
+      <to>Microsoft Excel writer</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Tercera_Validacion Excel input</name>
+    <name>Cuarta_Validacion Excel input</name>
     <type>ExcelInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -474,7 +509,7 @@
     <accept_field/>
     <accept_stepname/>
     <file>
-      <name>C:\Desafio_Pentaho\Files\Tercera_Validacion.xls</name>
+      <name>C:\Desafio_Pentaho\Files\Cuarta_validacion.xls</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -556,7 +591,7 @@
     </fields>
     <sheets>
       <sheet>
-        <name>Validacion PI</name>
+        <name>Validacion Duplicados</name>
         <startrow>0</startrow>
         <startcol>0</startcol>
       </sheet>
@@ -589,8 +624,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>288</yloc>
+      <xloc>80</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -655,14 +690,416 @@ Resultado = resultado;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>288</yloc>
+      <xloc>80</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Validacion Excel output</name>
-    <type>ExcelOutput</type>
+    <name>Reportar Provincias Inexistentes</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//Script here
+var provinciasValidas = [
+    "buenosaires", "catamarca", "chaco", "chubut", "cordoba", "corrientes",
+    "entrerios", "formosa", "jujuy", "lapampa", "larioja", "mendoza",
+    "misiones", "neuquen", "rionegro", "salta", "sanjuan", "sanluis",
+    "santacruz", "santafe", "santiagodelestero", "tierradelfuego", "tucuman"
+];
+
+var resultado = Resultado;
+var provincia = Provincia.toLowerCase().replace(/\s/g, "");
+
+if(provinciasValidas.indexOf(provincia) === -1 &amp;&amp; provincia != ""){
+	if (resultado == "" || resultado == null) {
+        resultado = "Provincia Inexistente";
+    } else {
+        resultado += ", Provincia Inexistente";
+    }
+}
+
+Resultado = resultado;</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>resultado</name>
+        <rename>resultado</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>240</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>Cód. Postal</name>
+        <ascending>N</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>Fecha</name>
+        <ascending>N</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>624</xloc>
+      <yloc>304</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Agregar OK</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//Script here
+var resultado = Resultado; 
+var uniquekey = UniqueKey; 
+if ((resultado == "" || resultado == null) &amp;&amp; uniquekey != "----") {
+    resultado = "OK";
+} </jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>resultado</name>
+        <rename>resultado</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>496</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>Cód. Postal</name>
+        <rename>Cod_Postal</rename>
+        <type>None</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>P.I.</name>
+        <rename>PI</rename>
+        <type>None</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>240</xloc>
+      <yloc>304</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Add constants</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>UniqueKey</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>368</xloc>
+      <yloc>304</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Modified JavaScript value</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var fecha = Fecha;
+var cod_postal = Cod_Postal;
+var pi = PI;
+var localidad = Localidad;
+var provincia = Provincia;
+var uniquekey = UniqueKey;
+
+uniquekey = fecha + "-" + cod_postal + "-" + pi + "-" + localidad + "-" + provincia;
+
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>uniquekey</name>
+        <rename>uniquekey</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>368</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>Fecha</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Cod_Postal</name>
+        <rename/>
+      </field>
+      <field>
+        <name>PI</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Localidad</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Provincia</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Resultado</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>Cod_Postal</name>
+        <rename>Cód. Postal</rename>
+        <type>None</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>PI</name>
+        <rename>P.I.</rename>
+        <type>None</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>496</xloc>
+      <yloc>304</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Microsoft Excel writer</name>
+    <type>TypeExitExcelWriterStep</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -673,82 +1110,116 @@ Resultado = resultado;
     </partitioning>
     <header>Y</header>
     <footer>N</footer>
-    <encoding/>
-    <append>N</append>
+    <makeSheetActive>Y</makeSheetActive>
+    <startingCell>A5</startingCell>
+    <appendOmitHeader>N</appendOmitHeader>
+    <appendOffset>0</appendOffset>
+    <appendEmpty>0</appendEmpty>
+    <rowWritingMethod>overwrite</rowWritingMethod>
+    <forceFormulaRecalculation>N</forceFormulaRecalculation>
+    <leaveExistingStylesUnchanged>N</leaveExistingStylesUnchanged>
+    <appendLines>N</appendLines>
     <add_to_result_filenames>Y</add_to_result_filenames>
     <file>
-      <name>C:\Desafio_Pentaho\Files\Cuarta_validacion</name>
+      <name>C:\Desafio_Pentaho\Reportes\Formato_1ro</name>
       <extention>xls</extention>
       <do_not_open_newfile_init>N</do_not_open_newfile_init>
-      <create_parent_folder>N</create_parent_folder>
       <split>N</split>
       <add_date>N</add_date>
       <add_time>N</add_time>
       <SpecifyFormat>N</SpecifyFormat>
       <date_time_format/>
-      <sheetname>Validacion Prov-Local</sheetname>
+      <sheetname>Validaciones Feriados</sheetname>
       <autosizecolums>N</autosizecolums>
-      <nullisblank>N</nullisblank>
+      <stream_data>N</stream_data>
       <protect_sheet>N</protect_sheet>
       <password>Encrypted </password>
+      <protected_by/>
       <splitevery>0</splitevery>
-      <usetempfiles>N</usetempfiles>
-      <tempdirectory/>
+      <if_file_exists>new</if_file_exists>
+      <if_sheet_exists>new</if_sheet_exists>
     </file>
     <template>
       <enabled>N</enabled>
-      <append>N</append>
+      <sheet_enabled>N</sheet_enabled>
       <filename>template.xls</filename>
+      <sheetname/>
+      <hidden>N</hidden>
     </template>
     <fields>
       <field>
         <name>Fecha</name>
         <type>String</type>
         <format/>
+        <title>Fecha</title>
+        <titleStyleCell/>
+        <styleCell/>
+        <commentField/>
+        <commentAuthorField/>
+        <formula>N</formula>
+        <hyperlinkField/>
       </field>
       <field>
         <name>Cód. Postal</name>
         <type>String</type>
         <format/>
+        <title>Cód. Postal</title>
+        <titleStyleCell/>
+        <styleCell/>
+        <commentField/>
+        <commentAuthorField/>
+        <formula>N</formula>
+        <hyperlinkField/>
       </field>
       <field>
         <name>P.I.</name>
         <type>String</type>
         <format/>
+        <title>P.I.</title>
+        <titleStyleCell/>
+        <styleCell/>
+        <commentField/>
+        <commentAuthorField/>
+        <formula>N</formula>
+        <hyperlinkField/>
       </field>
       <field>
         <name>Localidad</name>
         <type>String</type>
         <format/>
+        <title>Localidad</title>
+        <titleStyleCell/>
+        <styleCell/>
+        <commentField/>
+        <commentAuthorField/>
+        <formula>N</formula>
+        <hyperlinkField/>
       </field>
       <field>
         <name>Provincia</name>
         <type>String</type>
         <format/>
+        <title>Provincia</title>
+        <titleStyleCell/>
+        <styleCell/>
+        <commentField/>
+        <commentAuthorField/>
+        <formula>N</formula>
+        <hyperlinkField/>
       </field>
       <field>
         <name>Resultado</name>
         <type>String</type>
         <format/>
+        <title>Resultado</title>
+        <titleStyleCell/>
+        <styleCell/>
+        <commentField/>
+        <commentAuthorField/>
+        <formula>N</formula>
+        <hyperlinkField/>
       </field>
     </fields>
-    <custom>
-      <header_font_name>arial</header_font_name>
-      <header_font_size>10</header_font_size>
-      <header_font_bold>N</header_font_bold>
-      <header_font_italic>N</header_font_italic>
-      <header_font_underline>no</header_font_underline>
-      <header_font_orientation>horizontal</header_font_orientation>
-      <header_font_color>black</header_font_color>
-      <header_background_color>none</header_background_color>
-      <header_row_height>255</header_row_height>
-      <header_alignment>left</header_alignment>
-      <header_image/>
-      <row_font_name>arial</row_font_name>
-      <row_font_size>10</row_font_size>
-      <row_font_color>black</row_font_color>
-      <row_background_color>none</row_background_color>
-    </custom>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -758,8 +1229,8 @@ Resultado = resultado;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>288</yloc>
+      <xloc>624</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
