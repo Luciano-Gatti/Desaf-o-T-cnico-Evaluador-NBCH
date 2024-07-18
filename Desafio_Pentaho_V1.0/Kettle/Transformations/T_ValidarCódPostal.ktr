@@ -443,21 +443,21 @@
     </hop>
     <hop>
       <from>Validar Cód. Postal</from>
-      <to>Modified JavaScript value</to>
+      <to>Cod.Postal Incorrecto</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Rename Cod_Postal</from>
+      <from>Renombrar Cod_Postal</from>
       <to>Verificacion Excel output</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Modified JavaScript value</from>
-      <to>Rename Cod_Postal2</to>
+      <from>Cod.Postal Incorrecto</from>
+      <to>Renombrar Cod_Postal2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Rename Cod_Postal2</from>
+      <from>Renombrar Cod_Postal2</from>
       <to>Verificacion Excel output</to>
       <enabled>Y</enabled>
     </hop>
@@ -473,10 +473,63 @@
     </hop>
     <hop>
       <from>Verificar Longitud</from>
-      <to>Rename Cod_Postal</to>
+      <to>Renombrar Cod_Postal</to>
       <enabled>Y</enabled>
     </hop>
   </order>
+  <step>
+    <name>Cod.Postal Incorrecto</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var cod_postal = Cod_Postal; 
+var resultado = Resultado || ""; 
+
+if (resultado == "" || resultado == null) {
+    resultado = "Código postal incorrecto";
+} else {
+    resultado += ", Código postal incorrecto";
+}
+
+Resultado = resultado;</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>resultado</name>
+        <rename>resultado</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>432</xloc>
+      <yloc>464</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Modificar nombre columna</name>
     <type>SelectValues</type>
@@ -517,7 +570,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>240</xloc>
+      <xloc>256</xloc>
       <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
@@ -670,8 +723,8 @@
     </GUI>
   </step>
   <step>
-    <name>Verificar Longitud</name>
-    <type>ScriptValueMod</type>
+    <name>Renombrar Cod_Postal</name>
+    <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -680,43 +733,25 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var cod_postal = Cod_Postal; 
-var resultado = Resultado || ""; 
-
-if (cod_postal > 999999999999999 || cod_postal &lt; 0) {
-    if (resultado == "" || resultado == null) {
-        resultado = "Código postal incorrecto";
-    } else {
-        resultado += ", Código postal incorrecto";
-    }
-}
-
-Resultado = resultado;</jsScript_script>
-      </jsScript>
-    </jsScripts>
     <fields>
-      <field>
-        <name>cod_postal</name>
-        <rename>cod_postal</rename>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>Cod_Postal</name>
+        <rename>Cód. Postal</rename>
         <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>Y</replace>
-      </field>
-      <field>
-        <name>resultado</name>
-        <rename>resultado</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>Y</replace>
-      </field>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -727,8 +762,53 @@ Resultado = resultado;</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>544</xloc>
+      <xloc>688</xloc>
       <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Renombrar Cod_Postal2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>Cod_Postal</name>
+        <rename>Cód. Postal</rename>
+        <type>String</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>464</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -772,105 +852,7 @@ Resultado = resultado;</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>416</xloc>
-      <yloc>352</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Modified JavaScript value</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var cod_postal = Cod_Postal; 
-var resultado = Resultado || ""; 
-
-if (resultado == "" || resultado == null) {
-    resultado = "Código postal incorrecto";
-} else {
-    resultado += ", Código postal incorrecto";
-}
-
-Resultado = resultado;</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>resultado</name>
-        <rename>resultado</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>Y</replace>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>416</xloc>
-      <yloc>464</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Rename Cod_Postal</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>Cod_Postal</name>
-        <rename>Cód. Postal</rename>
-        <type>String</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>656</xloc>
+      <xloc>432</xloc>
       <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
@@ -973,14 +955,14 @@ Resultado = resultado;</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>784</xloc>
+      <xloc>832</xloc>
       <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Rename Cod_Postal2</name>
-    <type>SelectValues</type>
+    <name>Verificar Longitud</name>
+    <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -989,25 +971,43 @@ Resultado = resultado;</jsScript_script>
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var cod_postal = Cod_Postal; 
+var resultado = Resultado || ""; 
+
+if (cod_postal > 999999999999999 || cod_postal &lt; 0) {
+    if (resultado == "" || resultado == null) {
+        resultado = "Código postal. excede los 15 caracteres";
+    } else {
+        resultado += ", Código postal. excede los 15 caracteres";
+    }
+}
+
+Resultado = resultado;</jsScript_script>
+      </jsScript>
+    </jsScripts>
     <fields>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>Cod_Postal</name>
-        <rename>Cód. Postal</rename>
+      <field>
+        <name>cod_postal</name>
+        <rename>cod_postal</rename>
         <type>String</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>resultado</name>
+        <rename>resultado</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1018,15 +1018,15 @@ Resultado = resultado;</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>656</xloc>
-      <yloc>464</yloc>
+      <xloc>560</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step_error_handling>
     <error>
       <source_step>Validar Cód. Postal</source_step>
-      <target_step>Modified JavaScript value</target_step>
+      <target_step>Cod.Postal Incorrecto</target_step>
       <is_enabled>Y</is_enabled>
       <nr_valuename/>
       <descriptions_valuename/>

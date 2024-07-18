@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>T_ContarFeriadosLocalidad</name>
+    <name>T_TotalesLocalidad</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -427,68 +427,379 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2024/07/17 05:16:00.201</created_date>
+    <created_date>2024/07/18 16:54:18.370</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2024/07/17 05:16:00.201</modified_date>
-    <key_for_session_key/>
+    <modified_date>2024/07/18 17:01:37.465</modified_date>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <order>
     <hop>
-      <from>Reporte_1ro Excel input</from>
+      <from>Reporte Excel input</from>
+      <to>Filter OK's</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter OK's</from>
+      <to>Seleccionar Columnas</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Seleccionar Columnas</from>
+      <to>Normalizar Provincias</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Normalizar Provincias</from>
       <to>Sort rows</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Sort rows</from>
-      <to>Unique rows</to>
+      <to>Contar Repeticiones</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Unique rows</from>
-      <to>Filter rows</to>
+      <from>Contar Repeticiones</from>
+      <to>Cambiar Tipo Cantidad</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Filter rows</from>
-      <to>Select values</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values</from>
+      <from>Cambiar Tipo Cantidad</from>
       <to>Modified JavaScript value</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Modified JavaScript value</from>
-      <to>Sort rows 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sort rows 2</from>
-      <to>Unique rows 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Modified JavaScript value 2</from>
-      <to>Text file output</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Unique rows 2</from>
-      <to>Select values 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values 2</from>
-      <to>Modified JavaScript value 2</to>
+      <to>TotalXLocalidad file output</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Reporte_1ro Excel input</name>
+    <name>Cambiar Tipo Cantidad</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>Cantidad</name>
+        <rename>Cantidad</rename>
+        <type>String</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>528</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Contar Repeticiones</name>
+    <type>Unique</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <count_rows>Y</count_rows>
+    <count_field>Cantidad</count_field>
+    <reject_duplicate_row>N</reject_duplicate_row>
+    <error_description/>
+    <fields>
+      <field>
+        <name>Localidad</name>
+        <case_insensitive>N</case_insensitive>
+      </field>
+      <field>
+        <name>Provincia</name>
+        <case_insensitive>N</case_insensitive>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>528</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Filter OK's</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>Seleccionar Columnas</send_true_to>
+    <send_false_to/>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <conditions>
+          <condition>
+            <negated>N</negated>
+            <leftvalue>Resultado</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>OK</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask/>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>Resultado</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>Registro repetido</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask/>
+            </value>
+          </condition>
+        </conditions>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>224</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Modified JavaScript value</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//Script here
+//Script here
+var provincia = Provincia;
+var localidad = Localidad;
+var cantidad = Cantidad;
+
+var longitudDeseada = 60;
+
+// Lista de nombres compuestos a reinsertar espacios utilizando un arreglo bidimensional
+var nombresCompuestos = [
+	["BUENOSAIRES", "BUENOS AIRES"],
+    ["ENTRERIOS", "ENTRE RIOS"],
+    ["TIERRADELFUEGO", "TIERRA DEL FUEGO"],
+    ["LAPAMPA", "LA PAMPA"],
+    ["LARIOJA", "LA RIOJA"],
+    ["RIONEGRO", "RIO NEGRO"],
+    ["SANJUAN", "SAN JUAN"],
+    ["SANLUIS", "SAN LUIS"],
+    ["SANTAFE", "SANTA FE"],
+    ["SANTIAGODELESTERO", "SANTIAGO DEL ESTERO"]
+];
+
+// Verificar si la provincia es un nombre compuesto y reinsertar espacio
+for (var i = 0; i &lt; nombresCompuestos.length; i++) {
+    if (provincia == nombresCompuestos[i][0]) {
+        provincia = nombresCompuestos[i][1];
+        break;
+    }
+}
+
+
+if (provincia.length &lt; longitudDeseada) {
+    var espacios = "";
+    for (var i = provincia.length; i &lt; longitudDeseada; i++) {
+        espacios += " ";
+    }
+    provincia = provincia + espacios;
+} else if (provincia.length > longitudDeseada) {
+    provincia = provincia.substring(0, longitudDeseada);
+}
+
+if (localidad.length &lt; longitudDeseada) {
+    var espacios = "";
+    for (var i = localidad.length; i &lt; longitudDeseada; i++) {
+        espacios += " ";
+    }
+    localidad = localidad + espacios;
+} else if (localidad.length > longitudDeseada) {
+    localidad = localidad.substring(0, longitudDeseada);
+}
+
+
+longitudDeseada = 5; // Longitud deseada para el número de cantidad
+
+
+// Verificar y ajustar la longitud si es necesario
+if (cantidad.length &lt; longitudDeseada) {
+    var ceros = "";
+    for (var i = 0; i &lt; longitudDeseada - cantidad.length; i++) {
+        ceros += "0";
+    }
+    cantidad = ceros + cantidad;
+} else if (cantidad.length > longitudDeseada) {
+    cantidad = cantidad.substring(0, longitudDeseada); 
+}
+
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>provincia</name>
+        <rename>provincia</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>localidad</name>
+        <rename>localidad</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>cantidad</name>
+        <rename>cantidad</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Normalizar Provincias</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//Script here
+var provincia = Provincia.replace(/\s+/g, "");
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>provincia</name>
+        <rename>provincia</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Reporte Excel input</name>
     <type>ExcelInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -514,7 +825,7 @@
     <accept_field/>
     <accept_stepname/>
     <file>
-      <name>C:\Desafio_Pentaho\Reportes\Formato_1ro.xls</name>
+      <name>D:\PENTAHO_REPOS\output\reporte.xls</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -596,7 +907,7 @@
     </fields>
     <sheets>
       <sheet>
-        <name>Validaciones Feriados</name>
+        <name>Feriado Local</name>
         <startrow>4</startrow>
         <startcol>0</startcol>
       </sheet>
@@ -629,8 +940,42 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>64</xloc>
-      <yloc>368</yloc>
+      <xloc>128</xloc>
+      <yloc>336</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Seleccionar Columnas</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>Provincia</name>
+      </field>
+      <field>
+        <name>Localidad</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>224</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -654,282 +999,6 @@
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>Fecha</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>Cód. Postal</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>Localidad</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>P.I.</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>Provincia</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>64</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Unique rows</name>
-    <type>Unique</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <count_rows>N</count_rows>
-    <count_field/>
-    <reject_duplicate_row>N</reject_duplicate_row>
-    <error_description/>
-    <fields>
-      <field>
-        <name>Cód. Postal</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-      <field>
-        <name>Fecha</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-      <field>
-        <name>Localidad</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-      <field>
-        <name>P.I.</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-      <field>
-        <name>Provincia</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>192</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Filter rows</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>Select values</send_true_to>
-    <send_false_to/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <conditions>
-          <condition>
-            <negated>N</negated>
-            <leftvalue>Resultado</leftvalue>
-            <function>=</function>
-            <rightvalue/>
-            <value>
-              <name>constant</name>
-              <type>String</type>
-              <text>OK</text>
-              <length>-1</length>
-              <precision>-1</precision>
-              <isnull>N</isnull>
-              <mask/>
-            </value>
-          </condition>
-          <condition>
-            <negated>N</negated>
-            <operator>OR</operator>
-            <leftvalue>Resultado</leftvalue>
-            <function>=</function>
-            <rightvalue/>
-            <value>
-              <name>constant</name>
-              <type>String</type>
-              <text>Feriado duplicado</text>
-              <length>-1</length>
-              <precision>-1</precision>
-              <isnull>N</isnull>
-              <mask/>
-            </value>
-          </condition>
-        </conditions>
-      </condition>
-    </compare>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>192</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>Provincia</name>
-        <rename/>
-      </field>
-      <field>
-        <name>Localidad</name>
-        <rename/>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>320</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Modified JavaScript value</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>//Script here
-
-var provincia = Provincia;
-var provinciaNormalizada = provincia.replace(/\s+/g, "");
-
-provincia = provinciaNormalizada;
-</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>provincia</name>
-        <rename>provincia</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>Y</replace>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>320</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort rows 2</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
         <name>Provincia</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
@@ -955,182 +1024,13 @@ provincia = provinciaNormalizada;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>464</xloc>
+      <xloc>384</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Unique rows 2</name>
-    <type>Unique</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <count_rows>Y</count_rows>
-    <count_field>Cantidad</count_field>
-    <reject_duplicate_row>N</reject_duplicate_row>
-    <error_description/>
-    <fields>
-      <field>
-        <name>Provincia</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-      <field>
-        <name>Localidad</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>464</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Modified JavaScript value 2</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>//Script here
-var provincia = Provincia;
-var localidad = Localidad;
-var cantidad = Cantidad;
-
-var longitudDeseada = 60;
-
-// Lista de nombres compuestos a reinsertar espacios utilizando un arreglo bidimensional
-var nombresCompuestos = [
-	["BUENOSAIRES", "BUENOS AIRES"],
-    ["ENTRERIOS", "ENTRE RIOS"],
-    ["TIERRADELFUEGO", "TIERRA DEL FUEGO"],
-    ["LAPAMPA", "LA PAMPA"],
-    ["LARIOJA", "LA RIOJA"],
-    ["RIONEGRO", "RIO NEGRO"],
-    ["SANJUAN", "SAN JUAN"],
-    ["SANLUIS", "SAN LUIS"],
-    ["SANTAFE", "SANTA FE"],
-    ["SANTIAGODELESTERO", "SANTIAGO DEL ESTERO"]
-];
-
-// Verificar si la provincia es un nombre compuesto y reinsertar espacio
-for (var i = 0; i &lt; nombresCompuestos.length; i++) {
-    if (provincia == nombresCompuestos[i][0]) {
-        provincia = nombresCompuestos[i][1];
-        break;
-    }
-}
-
-
-if (provincia.length &lt; longitudDeseada) {
-    var espacios = "";
-    for (var i = provincia.length; i &lt; longitudDeseada; i++) {
-        espacios += " ";
-    }
-    provincia = provincia + espacios;
-} else if (provincia.length > longitudDeseada) {
-    provincia = provincia.substring(0, longitudDeseada);
-}
-
-if (localidad.length &lt; longitudDeseada) {
-    var espacios = "";
-    for (var i = localidad.length; i &lt; longitudDeseada; i++) {
-        espacios += " ";
-    }
-    localidad = localidad + espacios;
-} else if (localidad.length > longitudDeseada) {
-    localidad = localidad.substring(0, longitudDeseada);
-}
-
-
-longitudDeseada = 5; // Longitud deseada para el número de cantidad
-
-
-// Verificar y ajustar la longitud si es necesario
-if (cantidad.length &lt; longitudDeseada) {
-    var ceros = "";
-    for (var i = 0; i &lt; longitudDeseada - cantidad.length; i++) {
-        ceros += "0";
-    }
-    cantidad = ceros + cantidad;
-} else if (cantidad.length > longitudDeseada) {
-    cantidad = cantidad.substring(0, longitudDeseada); 
-}
-
-
-// Almacenar el nombre normalizado en una nueva columna
-Provincia = provincia;
-Localidad = localidad;
-Cantidad = cantidad;
-</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>provincia</name>
-        <rename>provincia</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>Y</replace>
-      </field>
-      <field>
-        <name>localidad</name>
-        <rename>localidad</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>Y</replace>
-      </field>
-      <field>
-        <name>cantidad</name>
-        <rename>cantidad</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>Y</replace>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>576</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Text file output</name>
+    <name>TotalXLocalidad file output</name>
     <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1148,15 +1048,15 @@ Cantidad = cantidad;
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding/>
+    <encoding>windows-1252</encoding>
     <endedLine/>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
-    <create_parent_folder>N</create_parent_folder>
+    <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>C:\Desafio_Pentaho\Reportes\Formato_3ro</name>
+      <name>D:\PENTAHO_REPOS\output\total_localidad</name>
       <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>txt</extention>
       <append>N</append>
       <split>N</split>
@@ -1168,7 +1068,7 @@ Cantidad = cantidad;
       <add_to_result_filenames>Y</add_to_result_filenames>
       <pad>N</pad>
       <fast_dump>N</fast_dump>
-      <splitevery>0</splitevery>
+      <splitevery/>
     </file>
     <fields>
       <field>
@@ -1197,7 +1097,7 @@ Cantidad = cantidad;
       </field>
       <field>
         <name>Cantidad</name>
-        <type>Integer</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -1217,53 +1117,8 @@ Cantidad = cantidad;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values 2</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>Cantidad</name>
-        <rename>Cantidad</rename>
-        <type>String</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>576</xloc>
-      <yloc>368</yloc>
+      <xloc>768</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
