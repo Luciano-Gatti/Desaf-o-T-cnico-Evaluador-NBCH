@@ -34,3 +34,20 @@ Este proyecto ETL carga feriados locales desde un archivo de entrada a una base 
    - Asegúrate de que el JRE esté correctamente instalado y configurado.
    - Verifica que la base de datos esté operativa y accesible desde el entorno donde se ejecutará el proyecto.
 
+## Contribuir
+
+Si deseas contribuir a este repositorio agregando tus propios ejercicios en Java o mejorando los existentes, ¡eres bienvenido! Aquí hay algunos pasos para contribuir:
+
+1. Haz un fork del repositorio.
+2. Crea una rama para tu función (`git checkout -b feature/AmazingFeature`).
+3. Realiza tus cambios y haz commit de ellos (`git commit -m 'Add some AmazingFeature'`).
+4. Haz push de la rama (`git push origin feature/AmazingFeature`).
+5. Abre un pull request.
+
+## Créditos
+
+Este repositorio es mantenido por [Luciano Emmanuel Gatti Flekenstein]. ¡Gracias a todos los contribuyentes por sus valiosas contribuciones!
+
+## Contacto
+
+Si tienes preguntas, sugerencias o problemas con alguno de los ejercicios, no dudes en ponerte en contacto  abriendo un issue en el repositorio.
