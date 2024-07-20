@@ -1,0 +1,6 @@
+CREATE TABLE feriados (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    fecha DATE NOT NULL,
+    descripcion VARCHAR(255) NOT NULL,
+    pais VARCHAR(100) NOT NULL
+);

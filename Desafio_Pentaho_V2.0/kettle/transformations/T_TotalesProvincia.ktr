@@ -438,11 +438,11 @@
   <order>
     <hop>
       <from>Filter OK's</from>
-      <to>Select values</to>
+      <to>Seleccionar Columnas</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values</from>
+      <from>Seleccionar Columnas</from>
       <to>Normalizar Provincias</to>
       <enabled>Y</enabled>
     </hop>
@@ -463,11 +463,11 @@
     </hop>
     <hop>
       <from>Contar Feriados</from>
-      <to>Modified JavaScript value</to>
+      <to>Setear Provincias</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Modified JavaScript value</from>
+      <from>Setear Provincias</from>
       <to>FeriadosXProvincia TXT output</to>
       <enabled>Y</enabled>
     </hop>
@@ -530,7 +530,7 @@
     <endedLine/>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
+    <create_parent_folder>N</create_parent_folder>
     <file>
       <name>D:\PENTAHO_REPOS\output\total_provincias</name>
       <servlet_output>N</servlet_output>
@@ -599,7 +599,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to>Select values</send_true_to>
+    <send_true_to>Seleccionar Columnas</send_true_to>
     <send_false_to/>
     <compare>
       <condition>
@@ -650,76 +650,6 @@
     <GUI>
       <xloc>192</xloc>
       <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Modified JavaScript value</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>//Script here
-var provincia = Provincia;
-
-// Lista de nombres compuestos a reinsertar espacios utilizando un arreglo bidimensional
-var nombresCompuestos = [
-	["BUENOSAIRES", "BUENOS AIRES"],
-    ["ENTRERIOS", "ENTRE RIOS"],
-    ["TIERRADELFUEGO", "TIERRA DEL FUEGO"],
-    ["LAPAMPA", "LA PAMPA"],
-    ["LARIOJA", "LA RIOJA"],
-    ["RIONEGRO", "RIO NEGRO"],
-    ["SANJUAN", "SAN JUAN"],
-    ["SANLUIS", "SAN LUIS"],
-    ["SANTAFE", "SANTA FE"],
-    ["SANTIAGODELESTERO", "SANTIAGO DEL ESTERO"]
-];
-
-// Verificar si la provincia es un nombre compuesto y reinsertar espacio
-for (var i = 0; i &lt; nombresCompuestos.length; i++) {
-    if (provincia == nombresCompuestos[i][0]) {
-        provincia = nombresCompuestos[i][1];
-        break;
-    }
-}
-
-
-</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>provincia</name>
-        <rename>provincia</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>Y</replace>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>496</xloc>
-      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -839,12 +769,7 @@ var provincia = Provincia.replace(/\s+/g, "");
     <accept_field/>
     <accept_stepname/>
     <file>
-      <name/>
-      <filemask/>
-      <exclude_filemask/>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-      <name>D:\PENTAHO_REPOS\output\reporte.xls</name>
+      <name>D:\PENTAHO_REPOS\input\reporte.xls</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -965,7 +890,7 @@ var provincia = Provincia.replace(/\s+/g, "");
     </GUI>
   </step>
   <step>
-    <name>Select values</name>
+    <name>Seleccionar Columnas</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -991,6 +916,76 @@ var provincia = Provincia.replace(/\s+/g, "");
     </remotesteps>
     <GUI>
       <xloc>192</xloc>
+      <yloc>336</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Setear Provincias</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//Script here
+var provincia = Provincia;
+
+// Lista de nombres compuestos a reinsertar espacios utilizando un arreglo bidimensional
+var nombresCompuestos = [
+	["BUENOSAIRES", "BUENOS AIRES"],
+    ["ENTRERIOS", "ENTRE RIOS"],
+    ["TIERRADELFUEGO", "TIERRA DEL FUEGO"],
+    ["LAPAMPA", "LA PAMPA"],
+    ["LARIOJA", "LA RIOJA"],
+    ["RIONEGRO", "RIO NEGRO"],
+    ["SANJUAN", "SAN JUAN"],
+    ["SANLUIS", "SAN LUIS"],
+    ["SANTAFE", "SANTA FE"],
+    ["SANTIAGODELESTERO", "SANTIAGO DEL ESTERO"]
+];
+
+// Verificar si la provincia es un nombre compuesto y reinsertar espacio
+for (var i = 0; i &lt; nombresCompuestos.length; i++) {
+    if (provincia == nombresCompuestos[i][0]) {
+        provincia = nombresCompuestos[i][1];
+        break;
+    }
+}
+
+
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>provincia</name>
+        <rename>provincia</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>496</xloc>
       <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>

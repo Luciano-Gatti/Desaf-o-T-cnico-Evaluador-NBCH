@@ -503,13 +503,18 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Seleccionar Columnas</from>
-      <to>Table Feriados</to>
+      <from>Limpiar tabla Feriados</from>
+      <to>Reporte Excel input</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Limpiar tabla Feriados</from>
-      <to>Reporte Excel input</to>
+      <from>Seleccionar Columnas</from>
+      <to>Normalizar Provincias</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Normalizar Provincias</from>
+      <to>Table Feriados</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -582,7 +587,7 @@
           </condition>
           <condition>
             <negated>N</negated>
-            <operator>AND</operator>
+            <operator>OR</operator>
             <leftvalue>Resultado</leftvalue>
             <function>=</function>
             <rightvalue/>
@@ -652,6 +657,73 @@
     </GUI>
   </step>
   <step>
+    <name>Normalizar Provincias</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var provincia = Provincia.replace(/\s+/g, "");
+
+// Lista de nombres compuestos a reinsertar espacios utilizando un arreglo bidimensional
+var nombresCompuestos = [
+	["BUENOSAIRES", "BUENOS AIRES"],
+    ["ENTRERIOS", "ENTRE RIOS"],
+    ["TIERRADELFUEGO", "TIERRA DEL FUEGO"],
+    ["LAPAMPA", "LA PAMPA"],
+    ["LARIOJA", "LA RIOJA"],
+    ["RIONEGRO", "RIO NEGRO"],
+    ["SANJUAN", "SAN JUAN"],
+    ["SANLUIS", "SAN LUIS"],
+    ["SANTAFE", "SANTA FE"],
+    ["SANTIAGODELESTERO", "SANTIAGO DEL ESTERO"]
+];
+
+// Verificar si la provincia es un nombre compuesto y reinsertar espacio
+for (var i = 0; i &lt; nombresCompuestos.length; i++) {
+    if (provincia == nombresCompuestos[i][0]) {
+        provincia = nombresCompuestos[i][1];
+        break;
+    }
+}
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>provincia</name>
+        <rename>provincia</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>480</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Reporte Excel input</name>
     <type>ExcelInput</type>
     <description/>
@@ -678,7 +750,7 @@
     <accept_field/>
     <accept_stepname/>
     <file>
-      <name>D:\PENTAHO_REPOS\output\reporte.xls</name>
+      <name>D:\PENTAHO_REPOS\input\reporte.xls</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -802,7 +874,7 @@
     <name>Seleccionar Columnas</name>
     <type>SelectValues</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -829,6 +901,57 @@
         <name>Provincia</name>
       </field>
       <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>Fecha</name>
+        <rename>Fecha</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>dd/MM/yyyy</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>Cód. Postal</name>
+        <rename>Cód. Postal</rename>
+        <type>Integer</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>P.I.</name>
+        <rename>P.I.</rename>
+        <type>Integer</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -907,7 +1030,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>560</xloc>
+      <xloc>576</xloc>
       <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
