@@ -34,6 +34,22 @@ Este proyecto ETL carga feriados locales desde un archivo de entrada a una base 
    - Asegúrate de que el JRE esté correctamente instalado y configurado.
    - Verifica que la base de datos esté operativa y accesible desde el entorno donde se ejecutará el proyecto.
 
+## Uso
+
+Para utilizar las transformaciones y ejemplos incluidos en este repositorio, sigue estos pasos:
+
+1. **Clonar el Repositorio**:
+    ```bash
+    git clone https://github.com/Luciano-Gatti/Desafio-Tecnico-Evaluador-NBCH.git
+    ```
+
+2. **Abrir Transformaciones**:
+    - Abre Spoon (o la herramienta ETL correspondiente) y carga las transformaciones desde el directorio clonado.
+
+3. **Ejecutar Transformaciones**:
+    - Configura las conexiones a bases de datos si es necesario.
+    - Ejecuta las transformaciones y observa los resultados.
+
 ## Contribuir
 
 Si deseas contribuir a este repositorio agregando tus propios ejercicios en Java o mejorando los existentes, ¡eres bienvenido! Aquí hay algunos pasos para contribuir:
