@@ -1,6 +1,4 @@
 # Proyecto ETL de Feriados Locales
-
-## Descripción
 Este proyecto ETL carga feriados locales desde un archivo de entrada a una base de datos. El proceso incluye validaciones de los datos y la generación de reportes. Utiliza Pentaho Data Integration (Kettle) para transformar y cargar los datos.
 
 ## Estructura del Proyecto
