@@ -1,0 +1,79 @@
+Localidad;Provincia;Cantidad
+BAHIA BLANCA                                                ;BUENOS AIRES                                                ;00002
+CABILDO                                                     ;BUENOS AIRES                                                ;00001
+CARMEN DE PATAGONES                                         ;BUENOS AIRES                                                ;00001
+COPETONAS                                                   ;BUENOS AIRES                                                ;00001
+CORONEL DORREGO                                             ;BUENOS AIRES                                                ;00003
+CORONEL GRANADA                                             ;BUENOS AIRES                                                ;00001
+GENERAL CERRI                                               ;BUENOS AIRES                                                ;00001
+INGENIERO WHITE                                             ;BUENOS AIRES                                                ;00001
+MARIA IGNACIA                                               ;BUENOS AIRES                                                ;00001
+MONTE HERMOSO                                               ;BUENOS AIRES                                                ;00003
+NICANOR OLIVERA                                             ;BUENOS AIRES                                                ;00001
+ORENSE                                                      ;BUENOS AIRES                                                ;00001
+PASTEUR                                                     ;BUENOS AIRES                                                ;00001
+PELLEGRINI                                                  ;BUENOS AIRES                                                ;00001
+PELLEGRINIO                                                 ;BUENOS AIRES                                                ;00001
+PLAZA PARQUE                                                ;BUENOS AIRES                                                ;00001
+RIVERA                                                      ;BUENOS AIRES                                                ;00001
+TANDIL                                                      ;BUENOS AIRES                                                ;00001
+TORNQUIST                                                   ;BUENOS AIRES                                                ;00001
+TRENQUE LAUQUEN                                             ;BUENOS AIRES                                                ;00001
+TRES ARROYOS                                                ;BUENOS AIRES                                                ;00001
+VILLA AGUIRRE                                               ;BUENOS AIRES                                                ;00001
+VILLA DOLORES (SAN ISIDRO)                                  ;CATAMARCA                                                   ;00001
+NAMEKUSEI                                                   ;CHACO                                                       ;00001
+RESISTENCIA                                                 ;CHACO                                                       ;00001
+ALTO RIO SENGUER                                            ;CHUBUT                                                      ;00003
+BARRIO ROCA                                                 ;CHUBUT                                                      ;00001
+CHOLILA                                                     ;CHUBUT                                                      ;00001
+COMODORO RIVADAVIA                                          ;CHUBUT                                                      ;00002
+CORCOVADO                                                   ;CHUBUT                                                      ;00002
+EL HOYO                                                     ;CHUBUT                                                      ;00001
+EL MAITEN                                                   ;CHUBUT                                                      ;00001
+ESQUEL                                                      ;CHUBUT                                                      ;00001
+GAIMAN                                                      ;CHUBUT                                                      ;00001
+GOBERNADOR COSTA                                            ;CHUBUT                                                      ;00001
+LAGO PUELO                                                  ;CHUBUT                                                      ;00002
+PASO DE INDIOS                                              ;CHUBUT                                                      ;00001
+RADA TILLY                                                  ;CHUBUT                                                      ;00001
+RAWSON                                                      ;CHUBUT                                                      ;00001
+RIO MAYO                                                    ;CHUBUT                                                      ;00001
+SARMIENTO                                                   ;CHUBUT                                                      ;00001
+TRELEW                                                      ;CHUBUT                                                      ;00001
+TREVELIN                                                    ;CHUBUT                                                      ;00001
+SAN MARCOS SUD                                              ;CORDOBA                                                     ;00003
+CORRIENTES                                                  ;CORRIENTES                                                  ;00001
+LA CRUZ                                                     ;CORRIENTES                                                  ;00001
+CLORINDA                                                    ;FORMOSA                                                     ;00001
+COMANDANTE  FONTANA                                         ;FORMOSA                                                     ;00001
+EL COLORADO                                                 ;FORMOSA                                                     ;00001
+FORMOSA                                                     ;FORMOSA                                                     ;00001
+GENERAL BELGRANO                                            ;FORMOSA                                                     ;00001
+IBARRETA                                                    ;FORMOSA                                                     ;00001
+INGENIERO JUAREZ                                            ;FORMOSA                                                     ;00001
+LAGUNA BLANCA                                               ;FORMOSA                                                     ;00001
+LAS LOMITAS                                                 ;FORMOSA                                                     ;00001
+PIRANE                                                      ;FORMOSA                                                     ;00001
+AIMOGASTA                                                   ;LA RIOJA                                                    ;00001
+ANILLACO                                                    ;LA RIOJA                                                    ;00001
+CHAMICAL                                                    ;LA RIOJA                                                    ;00001
+CHEPES                                                      ;LA RIOJA                                                    ;00001
+CHILECITO                                                   ;LA RIOJA                                                    ;00001
+EL MILAGRO                                                  ;LA RIOJA                                                    ;00001
+FAMATINA                                                    ;LA RIOJA                                                    ;00003
+KONOHA                                                      ;LA RIOJA                                                    ;00001
+LA RIOJA                                                    ;LA RIOJA                                                    ;00001
+OLTA                                                        ;LA RIOJA                                                    ;00002
+SALICAS                                                     ;LA RIOJA                                                    ;00001
+VILLA UNION                                                 ;LA RIOJA                                                    ;00001
+VINCHINA                                                    ;LA RIOJA                                                    ;00001
+MEDRANO                                                     ;MENDOZA                                                     ;00001
+PIEDRA DEL AGUILA                                           ;NEUQUEN                                                     ;00001
+PLAZA HUINCUL                                               ;NEUQUEN                                                     ;00001
+PICHANAL                                                    ;SALTA                                                       ;00001
+ROMANG                                                      ;SANTA FE                                                    ;00003
+SAN JORGE "A"                                               ;SANTA FE                                                    ;00001
+SAN JORGE "B"                                               ;SANTA FE                                                    ;00001
+SUARDI                                                      ;SANTA FE                                                    ;00001
+VILA "B"                                                    ;SANTA FE                                                    ;00001
